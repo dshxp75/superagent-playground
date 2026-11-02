@@ -1,0 +1,26 @@
+name: ask-superagent
+
+# Manual trigger that opens a request as `github-actions[bot]`, so the agent can be exercised
+# without a second human GitHub account. Dispatch it from the Actions tab or with
+# `gh workflow run ask-superagent`.
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  ask:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open a request as a bot account
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BODY: |
+            @dshxp75 README 里这句 “Scratch repository for a dsh-superagent trial run”，
+            请把 trial 改成 test，其余不要动。
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "README: trial → test" \
+            --body "$BODY"
