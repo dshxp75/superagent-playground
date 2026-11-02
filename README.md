@@ -1,2 +1,2 @@
 # superagent-playground
-Scratch repository for a dsh-superagent trial run
+Scratch repository for a dsh-superagent test run
